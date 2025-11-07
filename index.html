@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shuffle Game</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #char {
+      font-size: 35vw; /* Scales dynamically for any phone screen */
+      font-weight: 900;
+      user-select: none;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    #char:active {
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+  <div id="char">A</div>
+
+  <script>
+    const chars = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'];
+    const charEl = document.getElementById('char');
+
+    function randomChar() {
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    function shuffleOnce() {
+      charEl.textContent = randomChar();
+    }
+
+    // Tap or click changes character
+    charEl.addEventListener('click', shuffleOnce);
+    // Press spacebar to change (for desktop)
+    document.addEventListener('keydown', e => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        shuffleOnce();
+      }
+    });
+
+    // Initial random letter
+    charEl.textContent = randomChar();
+  </script>
+</body>
+</html>
